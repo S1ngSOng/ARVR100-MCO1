@@ -1,44 +1,53 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 public class BoardPlacer : MonoBehaviour
 {
+    public GameObject prefab;                     // Prefab to place
+    private ARRaycastManager acm;                  // Reference to AR Raycast Manager
+    static List<ARRaycastHit> hits = new List<ARRaycastHit>();  // Raycast results
+    private bool objectPlaced = false;             // Flag to ensure single placement
 
-    ARAnchorManager anchorManager;
-    [SerializeField] private GameObject prefabToAnchor;
-    [SerializeField] private float forwardOffset = 2f;
-    private bool isPlaced;
+    // Store the instantiated object for AgentManager reference
+    public GameObject placedObject;
 
-    // Start is called before the first frame update
     void Start()
     {
-        anchorManager = GetComponent<ARAnchorManager>();
-        isPlaced = false;
+        acm = GetComponent<ARRaycastManager>();    // Initialize AR Raycast Manager
     }
 
-    // Update is called once per frame
+    bool TryGetTouchPosition(out Vector2 touchPosition)
+    {
+        if (Input.touchCount > 0)
+        {
+            touchPosition = Input.GetTouch(0).position;
+            return true;
+        }
+
+        touchPosition = default;
+        return false;
+    }
+
+    public void ChangePrefab(GameObject newPrefab)
+    {
+        prefab = newPrefab;
+    }
+
     void Update()
     {
-        if (Input.GetTouch(0).phase == TouchPhase.Began && isPlaced == false)
+        // Check if the object has already been placed
+        if (objectPlaced || !TryGetTouchPosition(out Vector2 touchPosition))
+            return;
+
+        if (Input.GetTouch(0).phase == TouchPhase.Began && acm.Raycast(touchPosition, hits, TrackableType.PlaneWithinPolygon))
         {
-            Vector3 spawnPos = 
-                Camera.main.ScreenPointToRay(Input.GetTouch(0).position).GetPoint(forwardOffset);
+            var hitPose = hits[0].pose;            // Get hit position and rotation
 
-            AnchorObject(spawnPos);
-            isPlaced = true;
+            // Place the object, store reference, and set flag to prevent additional placements
+            placedObject = Instantiate(prefab, hitPose.position, hitPose.rotation);
+            objectPlaced = true;
         }
-    }
-
-    public void AnchorObject(Vector3 spawnPos)
-    {
-        GameObject newAnchor = new GameObject("NewAnchor");
-        newAnchor.transform.parent = null;
-        newAnchor.transform.position = spawnPos;
-        newAnchor.AddComponent<ARAnchor>();
-
-        GameObject obj = Instantiate(prefabToAnchor, newAnchor.transform);
-        obj.transform.localPosition = Vector3.zero;
     }
 }
