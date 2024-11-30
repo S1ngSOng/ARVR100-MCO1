@@ -5,30 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class DeleteCubeMine : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public BoardManager boardManager; // Reference to the Board script
+
     void Start()
     {
-        // Optional: Initialization code can go here if needed
+        boardManager = FindObjectOfType<BoardManager>(); // Automatically find the Board script
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        // Optional: Update code can go here if needed
-    }
-
-    // This method is triggered when the object is clicked
     void OnMouseDown()
     {
-        // Destroy the GameObject this script is attached to
-        Destroy(gameObject);
-        gameOver();
+        // Notify the board manager that a mine was hit
+        if (boardManager != null)
+        {
+            boardManager.MineHit();
+        }
 
+        Destroy(gameObject); // Optionally destroy the mine
     }
-    public void gameOver()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // Load the next scene
-    }
-    // Coroutine to handle the delay before switching scenes
-
 }
