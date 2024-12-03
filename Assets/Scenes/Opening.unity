@@ -360,8 +360,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1786344878}
-        m_TargetAssemblyTypeName: Mainmenu, Assembly-CSharp
-        m_MethodName: playgame
+        m_TargetAssemblyTypeName: MultiplayerMainMenu, Assembly-CSharp
+        m_MethodName: playMultiPlayerGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -987,8 +987,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b3902f4abaaee4ca70ee688dab8a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiPlayButton: {fileID: 247738223}
-  multiPlayButtonText: {fileID: 257860436}
 --- !u!1 &898871392
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,7 +1209,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 856879041}
         m_TargetAssemblyTypeName: Mainmenu, Assembly-CSharp
-        m_MethodName: playgame
+        m_MethodName: playSinglePlayerGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1718,11 +1716,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1786344876}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73b3902f4abaaee4ca70ee688dab8a23, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a1bf4732ad9b6b46abfe68cf7483a34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiPlayButton: {fileID: 0}
-  multiPlayButtonText: {fileID: 0}
+  multiPlayButton: {fileID: 247738223}
+  multiPlayButtonText: {fileID: 257860436}
 --- !u!1 &1858466203
 GameObject:
   m_ObjectHideFlags: 0
