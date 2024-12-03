@@ -496,6 +496,7 @@ MonoBehaviour:
   totalBoxes: 22
   singlePlayerTimer: {fileID: 1028372482}
   multiPlayerTimer: {fileID: 1028372486}
+  gameSession: {fileID: 1291751898}
 --- !u!114 &722235492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,6 +510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1595357581691901383, guid: a08f5848f1ddbe94d8dfd252ddfb7195, type: 3}
+  planeManager: {fileID: 0}
   singlePlayerTimer: {fileID: 1028372482}
   multiPlayerTimer: {fileID: 1028372486}
 --- !u!1 &733242078

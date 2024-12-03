@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.XR.ARFoundation;
 
 public class GameOver : MonoBehaviourPunCallbacks
 {

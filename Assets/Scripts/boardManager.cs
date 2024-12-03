@@ -2,6 +2,8 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.ARCore;
+using UnityEngine.XR.ARFoundation;
 
 
 public class BoardManager : MonoBehaviourPunCallbacks
@@ -12,6 +14,7 @@ public class BoardManager : MonoBehaviourPunCallbacks
     public Counter singlePlayerTimer; // Reference to the Counter script
     public PhotonView multiPlayerTimer; 
     public static bool Result = true;
+    [SerializeField] ARSession gameSession;
 
     void Start()
     {
@@ -58,6 +61,8 @@ public class BoardManager : MonoBehaviourPunCallbacks
         {
             Result = true;
         }
+
+        gameSession.Reset();
 
         // Multiplayer
         if (PhotonNetwork.InRoom && PhotonNetwork.IsMasterClient)
