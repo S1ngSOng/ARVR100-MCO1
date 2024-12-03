@@ -11,14 +11,8 @@ public class GameOver : MonoBehaviourPunCallbacks
     // Method to restart or play again
     public void PlayGame()
     {
-        if (PhotonNetwork.InRoom){
-            PhotonNetwork.LoadLevel("Opening");
-            PhotonNetwork.LeaveRoom();
-        }
-        else
-        {
-            SceneManager.LoadScene("Opening");
-        }
-        
+        if (PhotonNetwork.InRoom){PhotonNetwork.LeaveRoom();}
+        SceneManager.LoadScene("Opening");
+
     }
 }
