@@ -62,11 +62,11 @@ public class BoardPlacer : MonoBehaviourPunCallbacks
             var hitPose = hits[0].pose;
 
             // Place the object, store reference, and set flag to prevent additional placements
-            if (PhotonNetwork.InRoom)
+            if (PhotonNetwork.InRoom && PhotonNetwork.IsMasterClient)
             {
                 PhotonNetwork.Instantiate("Board", hitPose.position, hitPose.rotation);
             }
-            else
+            else if (!PhotonNetwork.InRoom)
             {
                 Instantiate(prefab, hitPose.position, hitPose.rotation);
             }
