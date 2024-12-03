@@ -23,6 +23,11 @@ public class BoardPlacer : MonoBehaviourPunCallbacks
     {
         acm = GetComponent<ARRaycastManager>();
         planeManager = GetComponent<ARPlaneManager>();
+        if(PhotonNetwork.IsConnected && !PhotonNetwork.IsMasterClient)
+        {
+            planeManager.enabled = false;
+        }
+        
 
         // Find the Counter script in the scene (ensure it's attached to a GameObject)
         singlePlayerTimer = FindObjectOfType<Counter>();
