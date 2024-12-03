@@ -11,7 +11,7 @@ public class DeleteCubeMine : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        boardManager = FindObjectOfType<BoardManager>(); // Automatically find the Board script
+        boardManager = FindObjectOfType<BoardManager>();
     }
 
     void OnMouseDown()
@@ -19,7 +19,14 @@ public class DeleteCubeMine : MonoBehaviourPunCallbacks
         // Notify the board manager that a mine was hit
         if (boardManager != null)
         {
-            boardManager.MineHit();
+            if (PhotonNetwork.InRoom)
+            {
+                this.photonView.RPC("callMineHit", RpcTarget.All);
+            }
+            else
+            {
+                callMineHit();
+            }
         }
 
         if (PhotonNetwork.InRoom)
@@ -37,5 +44,11 @@ public class DeleteCubeMine : MonoBehaviourPunCallbacks
     void sweepBox()
     {
         Destroy(gameObject);
+    }
+
+    [PunRPC]
+    void callMineHit()
+    {
+        boardManager.MineHit();
     }
 }

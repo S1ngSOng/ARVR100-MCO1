@@ -65,32 +65,32 @@ public class BoardPlacer : MonoBehaviourPunCallbacks
             if (PhotonNetwork.InRoom && PhotonNetwork.IsMasterClient)
             {
                 PhotonNetwork.Instantiate("Board", hitPose.position, hitPose.rotation);
+                objectPlaced = true;
             }
             else if (!PhotonNetwork.InRoom)
             {
                 Instantiate(prefab, hitPose.position, hitPose.rotation);
+                objectPlaced = true;
             }
-            
-            objectPlaced = true;
-
-
 
             // Start the timer
-            if(PhotonNetwork.InRoom)
+            if(objectPlaced == true)
             {
-                if (multiPlayerTimer != null)
+                if (PhotonNetwork.InRoom)
                 {
-                    multiPlayerTimer.RPC("StartTimer", RpcTarget.All);
+                    if (multiPlayerTimer != null)
+                    {
+                        multiPlayerTimer.RPC("StartTimer", RpcTarget.All);
+                    }
+                }
+                else
+                {
+                    if (singlePlayerTimer != null)
+                    {
+                        singlePlayerTimer.StartTimer();
+                    }
                 }
             }
-            else
-            {
-                if (singlePlayerTimer != null)
-                {
-                    singlePlayerTimer.StartTimer();
-                }
-            }
-            
 
             // Notify the Board script to initialize the game logic
             if (boardManager != null)

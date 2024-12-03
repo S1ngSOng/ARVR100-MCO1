@@ -47,6 +47,10 @@ MonoBehaviour:
   - SweepBox
   - sweepBox
   - DisplayResult
+  - MineHit
+  - BoxCleared
+  - callMineHit
+  - callBoxCleared
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 0

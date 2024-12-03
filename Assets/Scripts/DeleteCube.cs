@@ -16,7 +16,14 @@ public class DeleteCube : MonoBehaviourPunCallbacks
         // Notify the board manager about the cleared box
         if (boardManager != null)
         {
-            boardManager.BoxCleared();
+            if (PhotonNetwork.InRoom)
+            {
+                this.photonView.RPC("callBoxCleared", RpcTarget.All);
+            }
+            else
+            {
+                callBoxCleared();
+            }
         }
 
         if (PhotonNetwork.InRoom)
@@ -33,5 +40,11 @@ public class DeleteCube : MonoBehaviourPunCallbacks
     void sweepBox()
     {
         Destroy(gameObject);
+    }
+
+    [PunRPC]
+    void callBoxCleared()
+    {
+        boardManager.BoxCleared();
     }
 }
