@@ -1,0 +1,5 @@
+C:/Users/ongsh/Documents/Repositiories/ARVR100-MCO1/.utmp/RelWithDebInfo/463j5j2t/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/ongsh/Documents/Repositiories/ARVR100-MCO1/.utmp/RelWithDebInfo/463j5j2t/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Users/ongsh/Documents/Repositiories/ARVR100-MCO1/.utmp/RelWithDebInfo/463j5j2t/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/Users/ongsh/Documents/Repositiories/ARVR100-MCO1/.utmp/RelWithDebInfo/463j5j2t/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Users/ongsh/Documents/Repositiories/ARVR100-MCO1/.utmp/RelWithDebInfo/463j5j2t/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir

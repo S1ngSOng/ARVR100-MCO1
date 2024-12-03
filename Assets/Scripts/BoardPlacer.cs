@@ -1,31 +1,32 @@
 using System.Collections.Generic;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
-public class BoardPlacer : MonoBehaviour
+public class BoardPlacer : MonoBehaviourPunCallbacks
 {
-    public GameObject prefab;                     // Prefab to place
-    private ARRaycastManager acm;                 // Reference to AR Raycast Manager
-    static List<ARRaycastHit> hits = new List<ARRaycastHit>();  // Raycast results
-    private bool objectPlaced = false;            // Flag to ensure single placement
+    public GameObject prefab;                     
+    private ARRaycastManager acm;                 
+    static List<ARRaycastHit> hits = new List<ARRaycastHit>();  
+    private bool objectPlaced = false;
+    public ARPlaneManager planeManager;
 
-    // Store the instantiated object for AgentManager reference
-    public GameObject placedObject;
+    // Reference to the timer
+    public Counter singlePlayerTimer;
+    public PhotonView multiPlayerTimer;
 
-    // Reference to the Counter script
-    private Counter timer;
-
-    // Reference to the Board script (game logic manager)
     private BoardManager boardManager;
 
     void Start()
     {
-        acm = GetComponent<ARRaycastManager>();   // Initialize AR Raycast Manager
+        acm = GetComponent<ARRaycastManager>();
+        planeManager = GetComponent<ARPlaneManager>();
 
         // Find the Counter script in the scene (ensure it's attached to a GameObject)
-        timer = FindObjectOfType<Counter>();
-        if (timer == null)
+        singlePlayerTimer = FindObjectOfType<Counter>();
+        if (singlePlayerTimer == null)
         {
             Debug.LogError("Counter script not found in the scene.");
         }
@@ -50,11 +51,6 @@ public class BoardPlacer : MonoBehaviour
         return false;
     }
 
-    public void ChangePrefab(GameObject newPrefab)
-    {
-        prefab = newPrefab;
-    }
-
     void Update()
     {
         // Check if the object has already been placed
@@ -63,25 +59,47 @@ public class BoardPlacer : MonoBehaviour
 
         if (Input.GetTouch(0).phase == TouchPhase.Began && acm.Raycast(touchPosition, hits, TrackableType.PlaneWithinPolygon))
         {
-            var hitPose = hits[0].pose;           // Get hit position and rotation
+            var hitPose = hits[0].pose;
 
             // Place the object, store reference, and set flag to prevent additional placements
-            placedObject = Instantiate(prefab, hitPose.position, hitPose.rotation);
-            objectPlaced = true;
+            if (PhotonNetwork.InRoom && PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.Instantiate("Board", hitPose.position, hitPose.rotation);
+                objectPlaced = true;
+            }
+            else if (!PhotonNetwork.InRoom)
+            {
+                Instantiate(prefab, hitPose.position, hitPose.rotation);
+                objectPlaced = true;
+            }
 
             // Start the timer
-            if (timer != null)
+            if(objectPlaced == true)
             {
-                timer.StartTimer();
+                if (PhotonNetwork.InRoom)
+                {
+                    if (multiPlayerTimer != null)
+                    {
+                        multiPlayerTimer.RPC("StartTimer", RpcTarget.All);
+                    }
+                }
+                else
+                {
+                    if (singlePlayerTimer != null)
+                    {
+                        singlePlayerTimer.StartTimer();
+                    }
+                }
             }
 
             // Notify the Board script to initialize the game logic
             if (boardManager != null)
             {
-                boardManager.enabled = true; // Enable the game logic
+                boardManager.enabled = true; 
             }
 
             Debug.Log("Board placed and timer started!");
         }
     }
+
 }
