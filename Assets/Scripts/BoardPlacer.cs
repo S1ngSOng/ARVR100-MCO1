@@ -4,6 +4,7 @@ using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+using CandyCoded.HapticFeedback;
 
 public class BoardPlacer : MonoBehaviourPunCallbacks
 {
@@ -23,7 +24,7 @@ public class BoardPlacer : MonoBehaviourPunCallbacks
     {
         acm = GetComponent<ARRaycastManager>();
         planeManager = GetComponent<ARPlaneManager>();
-        if(PhotonNetwork.IsConnected && !PhotonNetwork.IsMasterClient)
+        if(PhotonNetwork.InRoom && !PhotonNetwork.IsMasterClient)
         {
             planeManager.enabled = false;
         }
@@ -69,11 +70,13 @@ public class BoardPlacer : MonoBehaviourPunCallbacks
             // Place the object, store reference, and set flag to prevent additional placements
             if (PhotonNetwork.InRoom && PhotonNetwork.IsMasterClient)
             {
+                HapticFeedback.HeavyFeedback();
                 PhotonNetwork.Instantiate("Board", hitPose.position, hitPose.rotation);
                 objectPlaced = true;
             }
             else if (!PhotonNetwork.InRoom)
             {
+                HapticFeedback.HeavyFeedback();
                 Instantiate(prefab, hitPose.position, hitPose.rotation);
                 objectPlaced = true;
             }

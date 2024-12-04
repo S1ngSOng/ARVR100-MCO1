@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
+using CandyCoded.HapticFeedback;
 
 public class DeleteCubeMine : MonoBehaviourPunCallbacks
 {
@@ -35,7 +36,7 @@ public class DeleteCubeMine : MonoBehaviourPunCallbacks
         }
         else
         {
-            Destroy(gameObject);
+            sweepBox();
         }
         
     }
@@ -43,6 +44,7 @@ public class DeleteCubeMine : MonoBehaviourPunCallbacks
     [PunRPC]
     void sweepBox()
     {
+        HapticFeedback.MediumFeedback();
         Destroy(gameObject);
     }
 

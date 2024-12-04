@@ -8,6 +8,8 @@ Library: D:\Unity Projects\ARVR100-MCO1\Temp\BurstOutput\tempburstlibs\armeabi-v
 --float-precision=Standard
 --target-framework=NetFramework
 --assembly-defines=Assembly-CSharp;
+--assembly-defines=CandyCoded.HapticFeedback.Android;
+--assembly-defines=CandyCoded.HapticFeedback;
 --assembly-defines=Mono.Security;
 --assembly-defines=mscorlib;
 --assembly-defines=Photon3Unity3D;
@@ -75,6 +77,8 @@ Library: D:\Unity Projects\ARVR100-MCO1\Temp\BurstOutput\tempburstlibs\armeabi-v
 --target-framework=NetFramework
 --float-mode=Fast
 --assembly-defines=Assembly-CSharp;
+--assembly-defines=CandyCoded.HapticFeedback.Android;
+--assembly-defines=CandyCoded.HapticFeedback;
 --assembly-defines=Mono.Security;
 --assembly-defines=mscorlib;
 --assembly-defines=Photon3Unity3D;
