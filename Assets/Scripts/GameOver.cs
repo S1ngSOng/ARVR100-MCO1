@@ -8,6 +8,21 @@ using UnityEngine.XR.ARFoundation;
 
 public class GameOver : MonoBehaviourPunCallbacks
 {
+    public AudioClip winGameAudio;
+
+    AudioSource audio;
+
+    void Start()
+    {
+        bool result = BoardManager.Result;
+        audio = GetComponent<AudioSource>();
+
+        if (result)
+        {
+            audio.PlayOneShot(winGameAudio, 0.8f);
+        }
+    }
+
     // Method to restart or play again
     public void PlayGame()
     {

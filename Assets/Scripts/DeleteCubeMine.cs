@@ -9,14 +9,28 @@ using CandyCoded.HapticFeedback;
 public class DeleteCubeMine : MonoBehaviourPunCallbacks
 {
     public BoardManager boardManager; // Reference to the Board script
+    public AudioClip sweepEffect;
+    public AudioClip explosionEffect;
+
+    AudioSource audio;
 
     void Start()
     {
         boardManager = FindObjectOfType<BoardManager>();
+        audio = GetComponent<AudioSource>();
     }
 
     void OnMouseDown()
     {
+        if (PhotonNetwork.InRoom)
+        {
+            this.photonView.RPC("sweepBox", RpcTarget.All);
+        }
+        else
+        {
+            sweepBox();
+        }
+
         // Notify the board manager that a mine was hit
         if (boardManager != null)
         {
@@ -30,22 +44,15 @@ public class DeleteCubeMine : MonoBehaviourPunCallbacks
             }
         }
 
-        if (PhotonNetwork.InRoom)
-        {
-            this.photonView.RPC("sweepBox", RpcTarget.All);
-        }
-        else
-        {
-            sweepBox();
-        }
-        
+
     }
 
     [PunRPC]
     void sweepBox()
     {
         HapticFeedback.MediumFeedback();
-        Destroy(gameObject);
+        audio.PlayOneShot(explosionEffect, 1f);
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
     [PunRPC]

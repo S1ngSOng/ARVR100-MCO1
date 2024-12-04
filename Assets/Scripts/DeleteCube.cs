@@ -2,14 +2,19 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using CandyCoded.HapticFeedback;
+using System.Collections;
 
 public class DeleteCube : MonoBehaviourPunCallbacks
 {
     public BoardManager boardManager; // Reference to the Board script
+    public AudioClip sweepEffect;
+
+    AudioSource audio;
 
     void Start()
     {
         boardManager = FindObjectOfType<BoardManager>(); // Automatically find the Board script
+        audio = GetComponent<AudioSource>();
     }
 
     void OnMouseDown()
@@ -37,11 +42,20 @@ public class DeleteCube : MonoBehaviourPunCallbacks
         }
     }
 
+    private void Update()
+    {
+        if (gameObject.GetComponent<MeshRenderer>().enabled == false && audio.isPlaying == false)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     [PunRPC]
     void sweepBox()
     {
         HapticFeedback.MediumFeedback();
-        Destroy(gameObject);
+        audio.PlayOneShot(sweepEffect, 0.75f);
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
 
     [PunRPC]
