@@ -1,6 +1,6 @@
 # MinesweepAR User Manual
 ## Introduction
-_MinesweepAR_ is a minesweeper game that was integrated with augmented reality. A classic is brought to life in a different reality, upgrading its experience and playability to players.
+_MinesweepAR_ is a minesweeper game that was integrated with augmented reality. This take on a classic brings to life, Minesweeper, in a different reality, upgrading its experience and playability to players. 
 
 ## Installation
 There are two ways to install the application:
