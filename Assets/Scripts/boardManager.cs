@@ -3,7 +3,6 @@ using Photon.Realtime;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.XR.ARCore;
 using UnityEngine.XR.ARFoundation;
 
 

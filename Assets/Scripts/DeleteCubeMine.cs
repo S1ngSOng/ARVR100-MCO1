@@ -16,7 +16,7 @@ public class DeleteCubeMine : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        boardManager = FindObjectOfType<BoardManager>();
+        boardManager = FindFirstObjectByType<BoardManager>();
         audio = GetComponent<AudioSource>();
     }
 

@@ -31,14 +31,14 @@ public class BoardPlacer : MonoBehaviourPunCallbacks
         
 
         // Find the Counter script in the scene (ensure it's attached to a GameObject)
-        singlePlayerTimer = FindObjectOfType<Counter>();
+        singlePlayerTimer = FindFirstObjectByType<Counter>();
         if (singlePlayerTimer == null)
         {
             Debug.LogError("Counter script not found in the scene.");
         }
 
         // Find the Board script in the scene
-        boardManager = FindObjectOfType<BoardManager>();
+        boardManager = FindFirstObjectByType<BoardManager>();
         if (boardManager == null)
         {
             Debug.LogError("Board script not found in the scene.");

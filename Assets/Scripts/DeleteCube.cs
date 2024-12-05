@@ -13,7 +13,7 @@ public class DeleteCube : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        boardManager = FindObjectOfType<BoardManager>(); // Automatically find the Board script
+        boardManager = FindFirstObjectByType<BoardManager>(); // Automatically find the Board script
         audio = GetComponent<AudioSource>();
     }
 
