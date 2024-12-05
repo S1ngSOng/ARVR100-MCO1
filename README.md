@@ -8,12 +8,13 @@ There are two ways to install the application:
 * Build and Run through Unity Editor
 
 ### Download and Install the APK file
-Access the google drive link to download the [APK file](https://drive.google.com/file/d/16Yke32TAOYO2CJPcxI5nzAM9ZkK6UO7y/view?usp=sharing).
+Access the Google Drive link to download the [APK file](https://drive.google.com/file/d/16Yke32TAOYO2CJPcxI5nzAM9ZkK6UO7y/view?usp=sharing).
 
 ### Build and Run through Unity Editor
 #### Prerequisites:
 * Unity Hub installed 2023.x version
-  * Android SDK & NDK tools installed
+  * With the corresponding package for the device OS.
+* Android SDK & NDK tools installed
 * OpenJDK installed
 * An Android Device (preferably android version 14)
 
