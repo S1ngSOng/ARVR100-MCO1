@@ -8,7 +8,7 @@ There are two ways to install the application:
 * Build and Run through Unity Editor
 
 ### Download and Install the APK file
-Access the google drive link to download the [APK file](https://drive.google.com/file/d/1YToO7PYNcgT6mjKDhfXkuxGQz7TYAmTf/view?usp=sharing).
+Access the google drive link to download the [APK file](https://drive.google.com/file/d/16Yke32TAOYO2CJPcxI5nzAM9ZkK6UO7y/view?usp=sharing).
 
 ### Build and Run through Unity Editor
 #### Prerequisites:
@@ -63,7 +63,9 @@ Once the game has launched, the device's camera will open and start scanning for
 
 ### My game is not connecting to the room with my friend
 * Make sure your phone is connected to the same network as your friend’s device.
-* Make sure your phone is connected to the photon network. This will be done automatically and is indicated by how many players there are in your current room.
+* Ensure the network connection is strong enough.
+* Make sure your phone is connected to the server network. This will be done automatically and is indicated by how many players there are in your current room.
+* When connecting let the one player connect to a room first. Once a number is shown in the player count, the other player may click multiplayer to join the room.
 * If no number shows up, press the back button and wait for a few seconds before clicking the multiplayer button again.
 
 ## Contact Information
